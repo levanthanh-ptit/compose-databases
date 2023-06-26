@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  mongo_s1:
+    container_name: mongo_c1
+    image: mongo:5.0.18
+    volumes:
+      - mongo:/data/db
+    networks:
+      - mongo-net
+    ports:
+      - 27017:27017
+    depends_on:
+      - mongo_s2
+      - mongo_s3
+    links:
+      - mongo_s2
+      - mongo_s3
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+
+  mongo_s2:
+    container_name: mongo_c2
+    image: mongo:5.0.18
+    volumes:
+      - mongo:/data/db
+    networks:
+      - mongo-net
+    ports:
+      - 27018:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+  mongo_s3:
+    container_name: mongo_c3
+    image: mongo:5.0.18
+    volumes:
+      - mongo:/data/db
+    networks:
+      - mongo-net
+    ports:
+      - 27019:27017
+    restart: always
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+
+networks:
+  mongo-net:
+    driver: bridge
+
+volumes:
+  mongo:
