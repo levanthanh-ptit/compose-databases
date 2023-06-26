@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-  postgres_local:
-    container_name: postgres_local_container
+  postgres_s1:
+    container_name: postgres_c1
     image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
