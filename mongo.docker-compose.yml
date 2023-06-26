@@ -5,7 +5,7 @@ services:
     container_name: mongo_c1
     image: mongo:5.0.18
     volumes:
-      - mongo:/data/db
+      - mongo_v1:/data/db
     networks:
       - mongo-net
     ports:
@@ -23,7 +23,7 @@ services:
     container_name: mongo_c2
     image: mongo:5.0.18
     volumes:
-      - mongo:/data/db
+      - mongo_v2:/data/db
     networks:
       - mongo-net
     ports:
@@ -34,7 +34,7 @@ services:
     container_name: mongo_c3
     image: mongo:5.0.18
     volumes:
-      - mongo:/data/db
+      - mongo_v3:/data/db
     networks:
       - mongo-net
     ports:
@@ -47,4 +47,6 @@ networks:
     driver: bridge
 
 volumes:
-  mongo:
+  mongo_v1:
+  mongo_v2:
+  mongo_v3:
